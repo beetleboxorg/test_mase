@@ -2,7 +2,8 @@
 runners:
  ubuntu-runner:
   image: public.ecr.aws/y2s4f3y9/ubuntu-generic
-  
+  # image: deepwok/mase-docker-cuda:latest
+    
 # Define a job to be performed during a workflow
 jobs:
   choose-commit:
@@ -10,10 +11,8 @@ jobs:
     steps:
       - run:
           name: Define diff commit
-          command: | 
-            echo Hello
-          
-            # DIFF_COMMIT_NAME="HEAD^"
+          command: |         
+            DIFF_COMMIT_NAME="HEAD^"
 
   chop-cpu-regression:
     runner: ubuntu-runner
@@ -23,10 +22,8 @@ jobs:
     steps:
       - run:
           name: Run software regression
-          command: |
-            echo Hello
-          
-            # bash scripts/test-machop.sh
+          command: |         
+            bash scripts/test-machop.sh
   
   chop-gpu-regression:
     runner: ubuntu-runner
@@ -38,9 +35,7 @@ jobs:
       - run:
           name: Run software regression
           command: |
-            echo Hello
-          
-            # bash scripts/test-machop-gpu.sh
+            bash scripts/test-machop-gpu.sh
 
   hw-regression:
     runner: ubuntu-runner
@@ -50,13 +45,11 @@ jobs:
     steps:
       - run:
           name: Run hardware regression
-          command: |
-            echo Hello
-          
-            # export PYTHONPATH="$PATH:$(pwd):$(pwd)/machop"
-            # echo PYTHONPATH
-            # echo $PYTHONPATH
-            # python3 scripts/test-hardware.py -a
+          command: |         
+            export PYTHONPATH="$PATH:$(pwd):$(pwd)/machop"
+            echo PYTHONPATH
+            echo $PYTHONPATH
+            python3 scripts/test-hardware.py -a
 
   hw-build:
     runner: ubuntu-runner
@@ -74,12 +67,11 @@ jobs:
       - run:
           name: Run hardware regression
           command: |
-            echo Hello
-            # export PYTHONPATH="$PATH:$(pwd):$(pwd)/machop"
-            # echo PYTHONPATH
-            # echo $PYTHONPATH
-            # pip3 install emoji # temporary: add to docker
-            # python3 scripts/build-mase-components.py --max-workers 1
+            export PYTHONPATH="$PATH:$(pwd):$(pwd)/machop"
+            echo PYTHONPATH
+            echo $PYTHONPATH
+            pip3 install emoji # temporary: add to docker
+            python3 scripts/build-mase-components.py --max-workers 1
 
 
 # Define a workflow to orchestrate a job
