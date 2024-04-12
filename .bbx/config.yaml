@@ -17,8 +17,6 @@ jobs:
   chop-cpu-regression:
     runner: ubuntu-runner
     resource_spec: large
-    node_selector:
-      kubernetes.io/hostname: ee-kraken
     steps:
       - run:
           name: Run software regression
@@ -29,8 +27,7 @@ jobs:
     runner: ubuntu-runner
     privileged: True
     resource_spec: large
-    node_selector:
-      kubernetes.io/hostname: ee-kraken
+
     steps:
       - run:
           name: Run software regression
@@ -39,8 +36,7 @@ jobs:
 
   hw-regression:
     runner: ubuntu-runner
-    node_selector:
-      kubernetes.io/hostname: ee-kraken
+
     resource_spec: large
     steps:
       - run:
@@ -60,8 +56,7 @@ jobs:
      - mount:
         name: board-files
         path: /home/pg519/shared/board-files
-    node_selector:
-      kubernetes.io/hostname: ee-kraken
+
     resource_spec: 2xlarge
     steps:
       - run:
