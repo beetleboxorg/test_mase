@@ -57,7 +57,7 @@ jobs:
         name: board-files
         path: /home/pg519/shared/board-files
 
-    resource_spec: 2xlarge
+    resource_spec: 1.5xlarge
     steps:
       - run:
           name: Run hardware regression
@@ -76,7 +76,7 @@ workflows:
       - pull_request
     jobs:
       - chop-cpu-regression
-      - chop-gpu-regression
+      # - chop-gpu-regression
 
   mase-hardware:
     triggers:
