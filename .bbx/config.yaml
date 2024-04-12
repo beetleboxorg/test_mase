@@ -3,6 +3,54 @@ runners:
   ubuntu-runner:
     image: deepwok/mase-docker-cuda:latest
 
+jobs:   
+ hello-world:
+  resource_spec: micro
+  runner: ubuntu-runner
+
+  
+  current_working_directory: ~/
+  output:
+   artifact:
+    - hello.txt  
+    - /root/artifact
+  steps:
+   - run:
+      name: Install software
+      command: |
+
+       echo $(pwd)
+       ls -a
+       cd /tmp
+       ls -a
+       mkdir -p /root/artifact
+       cp workflow*.tar.gz /root/artifact
+       tar -xzf *.tar.gz
+       apt-get update -y
+       apt-get install iputils-ping -y
+   - run:
+      name: Say Hello World
+      command: echo "Hello World" 
+   - run:
+      name: Text Hello World
+      command: echo "Hello World" > hello.txt    
+   - run:
+      name: fail
+      command: echo "ffffffffffff!"
+   - run:
+      name: wait
+      command: sleep 60     
+      
+workflows:
+ hello-world-workflow:
+  triggers:
+   - manual 
+   - push
+
+  jobs:
+   - hello-world
+
+   
 # Define a job to be performed during a workflow
 jobs:
   choose-commit:
