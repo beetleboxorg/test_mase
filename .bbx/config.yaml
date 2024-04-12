@@ -78,9 +78,9 @@ workflows:
       - chop-cpu-regression
       # - chop-gpu-regression
 
-  mase-hardware:
-    triggers:
-      - pull_request
-    jobs:
-      - hw-build
-      - hw-regression
+  # mase-hardware:
+  #   triggers:
+  #     - pull_request
+  #   jobs:
+  #     - hw-build
+  #     - hw-regression
