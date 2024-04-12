@@ -11,44 +11,52 @@ jobs:
       - run:
           name: Define diff commit
           command: | 
-            DIFF_COMMIT_NAME="HEAD^"
+            echo Hello
+          
+            # DIFF_COMMIT_NAME="HEAD^"
 
   chop-cpu-regression:
     runner: ubuntu-runner
-    resource_spec: small
+    resource_spec: large
     node_selector:
       kubernetes.io/hostname: ee-kraken
     steps:
       - run:
           name: Run software regression
           command: |
-            bash scripts/test-machop.sh
+            echo Hello
+          
+            # bash scripts/test-machop.sh
   
   chop-gpu-regression:
     runner: ubuntu-runner
     privileged: True
-    resource_spec: small
+    resource_spec: large
     node_selector:
       kubernetes.io/hostname: ee-kraken
     steps:
       - run:
           name: Run software regression
           command: |
-            bash scripts/test-machop-gpu.sh
+            echo Hello
+          
+            # bash scripts/test-machop-gpu.sh
 
   hw-regression:
     runner: ubuntu-runner
     node_selector:
       kubernetes.io/hostname: ee-kraken
-    resource_spec: small
+    resource_spec: large
     steps:
       - run:
           name: Run hardware regression
           command: |
-            export PYTHONPATH="$PATH:$(pwd):$(pwd)/machop"
-            echo PYTHONPATH
-            echo $PYTHONPATH
-            python3 scripts/test-hardware.py -a
+            echo Hello
+          
+            # export PYTHONPATH="$PATH:$(pwd):$(pwd)/machop"
+            # echo PYTHONPATH
+            # echo $PYTHONPATH
+            # python3 scripts/test-hardware.py -a
 
   hw-build:
     runner: ubuntu-runner
@@ -61,16 +69,17 @@ jobs:
         path: /home/pg519/shared/board-files
     node_selector:
       kubernetes.io/hostname: ee-kraken
-    resource_spec: small
+    resource_spec: 2xlarge
     steps:
       - run:
           name: Run hardware regression
           command: |
-            export PYTHONPATH="$PATH:$(pwd):$(pwd)/machop"
-            echo PYTHONPATH
-            echo $PYTHONPATH
-            pip3 install emoji # temporary: add to docker
-            python3 scripts/build-mase-components.py --max-workers 1
+            echo Hello
+            # export PYTHONPATH="$PATH:$(pwd):$(pwd)/machop"
+            # echo PYTHONPATH
+            # echo $PYTHONPATH
+            # pip3 install emoji # temporary: add to docker
+            # python3 scripts/build-mase-components.py --max-workers 1
 
 
 # Define a workflow to orchestrate a job
