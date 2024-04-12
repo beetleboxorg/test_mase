@@ -71,16 +71,16 @@ jobs:
 
 # Define a workflow to orchestrate a job
 workflows:
-  mase-software:
-    triggers:
-      - pull_request
-    jobs:
-      - chop-cpu-regression
-      # - chop-gpu-regression
-
-  # mase-hardware:
+  # mase-software:
   #   triggers:
   #     - pull_request
   #   jobs:
-  #     - hw-build
-  #     - hw-regression
+  #     - chop-cpu-regression
+  #     - chop-gpu-regression
+
+  mase-hardware:
+    triggers:
+      - pull_request
+    jobs:
+      - hw-build
+      # - hw-regression
